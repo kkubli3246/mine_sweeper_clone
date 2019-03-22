@@ -4,18 +4,19 @@ class Panel extends Component{
     constructor(props){
         super(props);
         this.state ={
-            hover: 'panel'
+            isRevealed: false,
+            value: this.props.value
         }
     }
-    handleMouseEnter = () =>{
-        this.setState({hover: 'panel-hover'});
-    }
-    handleMouseLeave = () =>{
-        this.setState({hover: 'panel'});
-    }
+    
+    
+   
+    
     render(){
+         
         return(
-        <div id ={this.state.hover} onMouseEnter = {() => this.handleMouseEnter()} onMouseLeave ={() => this.handleMouseLeave()}>
+            
+        <div className = {this.state.value} onClick = {() => this.props.handleClick()}>
             
         </div>
         )
