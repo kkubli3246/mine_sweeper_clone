@@ -37,14 +37,14 @@ class GameBoard extends Component{
             }
         }
         this.planetMines(board);
-        console.log(board);
+        this.getNeighbors(board);
+        
         return board;
     }
     planetMines = (board) =>{
         let planted = 0;
         
         while(planted < this.state.mineCount){
-            console.log(planted);
             let randomRow = Math.floor(Math.random() * this.state.boardData.rows);
             let randomCol = Math.floor(Math.random() * this.state.boardData.cols);
             if(board[randomRow][randomCol].isMine === false){
@@ -54,11 +54,53 @@ class GameBoard extends Component{
         }
         return board;
     }
-    renderBoard = (boardData) =>{
-        let cols = boardData.cols;
-        let rows = boardData.rows;
+    getNeighbors = (board) =>{
+        for(let i = 0; i < board.length; i++){
+            for(let j = 0; j < board[i].length; j++)
+            {
+
+                if(board[i][j].isMine == true){
+                    //check right
+                    if( j < 7 && board[i][j + 1].isMine !== true ){
+                        board[i][j+1].neighbors += 1;
+                    }
+                    //check top-right
+                    if( i > 0 && j < 7 && board[i - 1][j + 1].isMine !== true ){
+                        board[i - 1][ j + 1].neighbors += 1;
+                    }
+                    //check top
+                    if( i > 0 && board[i - 1][j].isMine !== true ){
+                        board[i - 1][j].neighbors += 1;
+                    }
+                    //check top-left
+                    if( i > 0 && j > 0 && board[i - 1][j - 1].isMine !== true ){
+                        board[i - 1][j - 1].neighbors += 1;
+                    }
+                    //check left
+                    if( j > 0 && board[i][j - 1].isMine !== true ){
+                        board[i][j - 1].neighbors += 1;
+                    }
+                    //check bottom-left
+                    if( i > 0 && j < 7 && board[i - 1][j + 1].isMine !== true ){
+                        board[i - 1][j + 1].neighbors += 1;
+                    }
+                    //check bottom
+                     if( i < 7 && board[i + 1][j].isMine !== true ){
+                        board[i + 1][j].neighbors += 1;
+                    }
+                    //check bottom-right
+                    if( i < 7 && j < 7 && board[i + 1][j + 1].isMine !== true){
+                        board[i + 1][j + 1].neighbors += 1;
+                    }
+                }
+                
+                
+            }
+        }
         
     }
+
+  
 
 
     render(){
@@ -67,8 +109,8 @@ class GameBoard extends Component{
             <div className = 'row'>
             <div className="col-sm-6">
             
-                <button onClick = {this.renderBoard(this.state.boardData)}>New Game</button>
-               {this.renderBoard(this.state.boardData)}
+                {/* <button onClick = {this.renderBoard(this.state.boardData)}>New Game</button> */}
+               
                 
             </div>
             </div>
