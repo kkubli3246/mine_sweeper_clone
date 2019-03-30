@@ -5,6 +5,7 @@ class Game extends Component{
     constructor(props){
         super(props);
         this.state ={
+            
             difficulty: null,
             cols: 8,
             rows: 8,
@@ -27,7 +28,7 @@ class Game extends Component{
                     <option>intermediate</option>
                     <option>expert</option>
                 </select>
-                <GameBoard cols = {this.state.cols} rows = {this.state.rows} mines = {this.state.mines}/>
+                <GameBoard cols = {this.state.cols} rows = {this.state.rows} mines = {this.state.mines} difficulty = {this.state.difficulty}/>
             </div>
         )
     }

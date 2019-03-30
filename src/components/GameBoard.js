@@ -9,11 +9,10 @@ class GameBoard extends Component{
             mineCount: this.props.mines,
             boardData: {  
                 rows: this.props.rows,
-                cols: this.props.cols
-                
-            }
-            
-          
+                cols: this.props.cols   
+            }, 
+            rendered: [[[]],[[]],[[]]],
+            isInProgress: false
         }
     }
     // componentWillReceiveProps = (nextProps) =>{
@@ -31,13 +30,18 @@ class GameBoard extends Component{
             board.push([]);
             for(let j = 0; j < cols; j++){
                 board[i][j] = {
+                    x: i,
+                    y: j,
+                    isRevealed: false,
                     isMine: false,
+                    isNewRow: false,
                     neighbors: 0
                 };
             }
         }
         this.planetMines(board);
         this.getNeighbors(board);
+        this.startCol(board);
         
         return board;
     }
@@ -59,7 +63,7 @@ class GameBoard extends Component{
             for(let j = 0; j < board[i].length; j++)
             {
 
-                if(board[i][j].isMine == true){
+                if(board[i][j].isMine === true){
                     //check right
                     if( j < 7 && board[i][j + 1].isMine !== true ){
                         board[i][j+1].neighbors += 1;
@@ -99,20 +103,40 @@ class GameBoard extends Component{
         }
         
     }
+    startCol = (board) =>{
+        for(let i = 0; i < board.length; i++){
+            board[i][0].isNewRow = true;
+        }
+    }
+   
 
-  
+    renderBoard = () =>{
+        let board = this.createBoard();
+        console.log(board);
+        return board.map((row, i) => {
+           
+            return row.map((panel,j) => {
+                return <Panel 
+                    key={j+ (i*board.length)}  
+                    isMine = {board[i][j].isMine} 
+                    isRevealed = {board[i][j].isRevealed}
+                    isNewRow = {board[i][j].isNewRow}
+                    neighbors = {board[i][j].neighbors}
+
+                />  
+            })
+            
+        })
+       
+        
+    }
 
 
     render(){
-        console.log(this.createBoard());
+        
         return(
-            <div className = 'row'>
-            <div className="col-sm-6">
-            
-                {/* <button onClick = {this.renderBoard(this.state.boardData)}>New Game</button> */}
-               
-                
-            </div>
+            <div className = 'game_board'>
+                {this.renderBoard()}
             </div>
         )
     }
