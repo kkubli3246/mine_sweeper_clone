@@ -16,9 +16,9 @@ class App extends Component {
         <h1>Mine Sweeper!</h1>         
         </header>
 
-        <div className='container'>
+        
           <Game />
-        </div>
+        
       </div>
     );
   }

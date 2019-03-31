@@ -31,9 +31,9 @@
   padding: 0%;
   width: 20px;
   height: 20px;
-  float:right
+  float:left
 }
-.col{
+.collumn{
   float: left
 }
 .mine{
@@ -44,12 +44,23 @@
   padding: 0%;
   width: 20px;
   height: 20px;
-  float:right
+  float:left
 }
 .neighbors{
   padding: 0%;
   margin: 0%;
-  color: lime;
+  font-weight: bold;
+  color: black;
+}
+.revealed{
+  border: 3px solid black;
+  border-left-color: darkgray;
+  border-top-color: darkgrey;
+  background-color: lightgray;
+  padding: 0%;
+  width: 20px;
+  height: 20px;
+  float:left
 }
 .timer {
   float: left;

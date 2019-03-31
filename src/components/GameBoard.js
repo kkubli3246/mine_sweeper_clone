@@ -21,7 +21,7 @@ class GameBoard extends Component{
     //     }
     // }
 
-    createBoard = () => {
+    createBoard = () =>{
         let board = [];
         let rows = this.state.boardData.rows;
         let cols = this.state.boardData.cols;
@@ -85,8 +85,8 @@ class GameBoard extends Component{
                         board[i][j - 1].neighbors += 1;
                     }
                     //check bottom-left
-                    if( i > 0 && j < 7 && board[i - 1][j + 1].isMine !== true ){
-                        board[i - 1][j + 1].neighbors += 1;
+                    if( i < 7 && j > 0 && board[i + 1][j - 1].isMine !== true ){
+                        board[i + 1][j - 1].neighbors += 1;
                     }
                     //check bottom
                      if( i < 7 && board[i + 1][j].isMine !== true ){
@@ -122,7 +122,7 @@ class GameBoard extends Component{
                     isRevealed = {board[i][j].isRevealed}
                     isNewRow = {board[i][j].isNewRow}
                     neighbors = {board[i][j].neighbors}
-
+                    
                 />  
             })
             
@@ -136,7 +136,7 @@ class GameBoard extends Component{
         
         return(
             <div className = 'game_board'>
-                {this.renderBoard()}
+              {this.renderBoard()}
             </div>
         )
     }

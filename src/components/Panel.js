@@ -14,16 +14,19 @@ class Panel extends Component{
    
     componentDidMount = () => {
         if(this.state.isNewRow === true){
-            this.setState({value: this.state.value + ' col'});
-            console.log('new row made');
+            this.setState({value: this.state.value + ' collumn'});
         }
     }
     handleClick = () => {
         if(this.state.isMine === true){
-            this.setState({value: 'mine'});
+            this.setState({value: "fas fa-bomb"});
         }
-        if(this.state.neighbors > 0){
+        else if(this.state.neighbors > 0){
             this.setState({isRevealed: true});
+            this.setState({value: 'revealed'});
+        }
+        else if(this.state.neighbors === 0 && this.state.isMine === false){
+            this.setState({value: 'revealed'});
         }
     }
     displayNum = () => {
